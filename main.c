@@ -4,16 +4,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include "read_content.h"
 #include "heap.h"
 
-int main(int argc, char** argv) {
 
+void create_heap();
+void sort_numbers();
+int main(int argc, char** argv) {
+ 
+   
+    get_number_trh();
+    get_all_files();
+    
+    sort_numbers();
+            
+    
+    
+    
     // Create the heap
-    heap h;
+    /*heap h;
     heap_create(&h,0,NULL);
 
     // Maximum
-    int count = 10000000; // 10M
+    int count = 10; // 10M
     if (argc > 1)
       count = atoi(argv[1]); // Get the count as an argument
     printf("Sorting array of %d random entries.\n", count);
@@ -39,7 +52,7 @@ int main(int argc, char** argv) {
             min = *(key+i);
 
         // Insert into the heap
-        heap_insert(&h, key+i, value);
+       
     }
 
 
@@ -62,5 +75,32 @@ int main(int argc, char** argv) {
 
     // Clean up the heap
     heap_destroy(&h);
+    */
+}
+/*
+void create_heap(){
+      
+      heap_create(&h,0,NULL);
+      int current = 0;
+      while(current<size_of_numbers){
+           heap_insert(&h, numbers[current], numbers[current]);
+           current++;
+      }
+  
 }
 
+void sort_numbers(){
+    long** buffer = malloc((size_of_numbers+2)* sizeof(long*));
+    long* key;
+    long*  value;
+    int i =0; 
+    int anws;
+    
+    while(anws !=0 && i<size_of_numbers){
+       anws =heap_delmin(&h,(void**)&key,(void**)&value);
+        long value1 = *value;
+        printf("%ld\n",value1);
+        i++;
+    }
+  
+}*/
