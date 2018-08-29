@@ -3,11 +3,12 @@
  * These are used to create and manipulate a heap
  * data structure.
  */
-
+#include <string.h>
+#include <strings.h>
 #include <unistd.h>
 #include <sys/mman.h>
 #include <assert.h>
-#include <strings.h>
+
 #include "heap.h"
 
 // Helpful Macros
@@ -24,9 +25,6 @@
                                     }
 
 #define GET_ENTRY(index,table) ((heap_entry*)(table+index))
-
-
-
 
 /**
  * Stores the number of heap_entry structures
@@ -97,6 +95,7 @@ int compare_int_keys(register void* key1, register void* key2) {
 
 // Creates a new heap
 void heap_create(heap* h, int initial_size, int (*comp_func)(void*,void*)) {
+mmap(NULL, 4096, PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);
     // Check if we need to setup our globals
     if (PAGE_SIZE == 0) {
         // Get the page size

@@ -6,7 +6,7 @@
 
 #ifndef HEAP_H
 #define HEAP_H
-
+#include<strings.h>
 // Structure for a single heap entry
 typedef struct heap_entry {
     void* key;   // Key for this entry

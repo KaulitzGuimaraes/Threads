@@ -1,4 +1,4 @@
-
+#include <strings.h>
 #include <unistd.h>
 #include <assert.h>
 #include <stdio.h>
@@ -11,8 +11,7 @@
 void create_heap();
 void sort_numbers();
 int main(int argc, char** argv) {
- 
-   
+    
     get_number_trh();
     get_all_files();
     
