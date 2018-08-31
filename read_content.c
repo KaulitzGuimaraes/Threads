@@ -13,16 +13,30 @@
 
 
 
-
- FILE* read_file(char* file_name){
+ FILE* open_file(char* file_name, char* type){
      
-      FILE* ds = fopen(file_name,"r");
+      FILE* ds = fopen(file_name,type);
       if(ds == NULL){
         
           return NULL;
       }
      
          
+      return ds;
+  }
+ 
+ FILE* read_file(char* file_name){
+     
+      FILE* ds = open_file(file_name,"r");
+      return ds;
+              
+  }
+ 
+
+ FILE* write_file(char* file_name){
+     
+      FILE* ds = fopen(file_name,"w");
+     
       return ds;
   }
  
@@ -66,21 +80,21 @@
      size_of_numbers =0;
  }
  void get_number_trh(){
+     printf("Enter numbers of threads (Only will be allowed same number for files) : ");
        scanf("%d",&thread_number);
  }
  
  void get_all_files(){
      create_heap();
-     int number_files;
-     scanf("%d",&number_files);
-     char** files = malloc(number_files*sizeof(char*));
-     for(int i = 0;i<number_files;i++){
+     printf("Enter file names to read data : ");
+     char** files = malloc(thread_number*sizeof(char*));
+     for(int i = 0;i<thread_number;i++){
          char* buffer = malloc(50*sizeof(char));
          scanf("%s",buffer);
          files[i] = buffer;
          
      }
-     read_all_files(files, number_files);
+     read_all_files(files);
  }
  void* thread_func(void *arg){
      char* file = (char*) arg;
@@ -94,11 +108,11 @@
          pthread_exit(NULL);
         
  }
- void read_all_files(char** files,int number_of_files){
+ void read_all_files(char** files){
      start_array();
      int buffer =0;
      pthread_t threads[thread_number];
-    while(buffer <number_of_files){
+    while(buffer <thread_number){
         pthread_create(&threads[buffer],NULL,thread_func, (void *)files[buffer]);
         pthread_join(threads[buffer], NULL);
           buffer++;
@@ -130,11 +144,15 @@ void sort_numbers(){
     long*  value;
     int i =0; 
     int anws;
-    
+    char* name = malloc(50*sizeof(char));
+    printf("Enter file name to save data : ");
+    scanf("%s",name);
+    FILE * f =  write_file(name);
     while(anws !=0 && i<size_of_numbers){
        anws =heap_delmin(&h,(void**)&key,(void**)&value);
         long value1 = *value;
-        printf("%ld\n",value1);
+        
+        fprintf(f,"%ld\n",value1);
         i++;
     }
 }

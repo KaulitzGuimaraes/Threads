@@ -29,6 +29,10 @@ void insert_heap(int current);
  * get numbers of threads by user input.
  */
 void  get_number_trh();
+
+FILE* open_file(char* file_name, char* type);
+
+ FILE* write_file(char* file_name);
 /**
  * Function to read a file.
  * @param file_name
@@ -49,7 +53,7 @@ void start_array();
   * @param files
   * @param number_of_files
   */
-void read_all_files(char** files,int number_of_files);
+void read_all_files(char** files);
 /**
  * Print numbers in the numbers array.
  */
