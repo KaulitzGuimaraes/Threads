@@ -111,13 +111,14 @@
  void read_all_files(char** files){
      start_array();
      int buffer =0;
-     pthread_t threads[thread_number];
+     pthread_t threads;
     while(buffer <thread_number){
-        pthread_create(&threads[buffer],NULL,thread_func, (void *)files[buffer]);
-        pthread_join(threads[buffer], NULL);
+        pthread_create(&threads,NULL,thread_func, (void *)files[buffer]);
+       
           buffer++;
          
-     } 
+     }
+     pthread_join(threads, NULL);
  }
      void print_numbers(){
         
