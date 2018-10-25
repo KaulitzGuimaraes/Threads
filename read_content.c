@@ -8,9 +8,8 @@
 #include <string.h>
 #include "read_content.h"
 #include <pthread.h>
-#define MAX_NUMBERS 1000000
-
-
+#define MAX_NUMBERS 10000000
+#include <sys/time.h>
 
 
  FILE* open_file(char* file_name, char* type){
@@ -112,13 +111,21 @@
      start_array();
      int buffer =0;
      pthread_t threads;
+     pthread_t threads[thread_number];
+     struct timeval stop, start;
+     gettimeofday(&start, NULL);
     while(buffer <thread_number){
         pthread_create(&threads,NULL,thread_func, (void *)files[buffer]);
        
+        pthread_create(&threads[buffer],NULL,thread_func, (void *)files[buffer]);
+        pthread_join(threads[buffer], NULL);
           buffer++;
          
      }
      pthread_join(threads, NULL);
+     gettimeofday(&stop, NULL);
+     printf("took %d\n", stop.tv_usec - start.tv_usec);
+
  }
      void print_numbers(){
         

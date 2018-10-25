@@ -3,3 +3,6 @@
 *.swp
 *.swo
 test
+.idea/libraries/R_User_Library.xml
+*.xml
+*.iml
