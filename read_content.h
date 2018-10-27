@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "heap.h"
+#include <sys/time.h>
 long size_of_numbers;
 int thread_number;
 long** numbers;
@@ -62,6 +63,10 @@ void read_all_files(char** files);
   * Reads amount of files and its names by user input.
   */
   void get_all_files();
+/**
+ Get the amount of time to exeute the threads
+ **/
+float timedifference_msec(struct timeval t0, struct timeval t1);
  
 #endif /* READ_CONTENT_H */
 

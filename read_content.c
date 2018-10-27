@@ -107,20 +107,32 @@
          pthread_exit(NULL);
         
  }
+
+float timedifference_msec(struct timeval t0, struct timeval t1)
+{
+    return (t1.tv_sec - t0.tv_sec) * 1000.0f + (t1.tv_usec - t0.tv_usec) / 1000.0f;
+}
+
  void read_all_files(char** files){
      start_array();
      int buffer =0;
      pthread_t threads[thread_number];
-     struct timeval stop, start;
-     gettimeofday(&start, NULL);
+     struct timeval t0;
+     struct timeval t1;
+     float elapsed;
+     
+     gettimeofday(&t0, 0);
     while(buffer <thread_number){
         pthread_create(&threads[buffer],NULL,thread_func, (void *)files[buffer]);
         pthread_join(threads[buffer], NULL);
           buffer++;
          
      }
-     gettimeofday(&stop, NULL);
-     printf("took %d\n", stop.tv_usec - start.tv_usec);
+     gettimeofday(&t1, 0);
+     
+     elapsed = timedifference_msec(t0, t1);
+     
+     printf("Code executed in %f milliseconds.\n", elapsed);
 
  }
      void print_numbers(){
