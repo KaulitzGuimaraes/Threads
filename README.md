@@ -13,5 +13,5 @@
 ```
 
 ## Follow the program instructions.
-## There is 15 files for testing (n0.txt - nX.txt)
+## There are 15 files for testing (n0.txt - nX.txt)
 ## All the file names are in names.txt
